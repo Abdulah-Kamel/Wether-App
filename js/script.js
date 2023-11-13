@@ -11,16 +11,14 @@ setTimeout(() => {
 
 async function getForcast(query) {
   let res = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=85725acfc1704c94aa1143606231011&q=${
-      query == null ? "cairo" : query
-    }&days=3`
+    `http://api.weatherapi.com/v1/forecast.json?key=85725acfc1704c94aa1143606231011&q=${query}&days=3`
   );
   if (res.status == 200 && res.ok) {
     let finalRes = await res.json();
     showForcast(finalRes);
   }
 }
-getForcast();
+getForcast("cairo");
 
 async function showForcast(finalRes) {
   let { forecast, location, current } = finalRes;
@@ -40,11 +38,9 @@ async function showForcast(finalRes) {
   });
   document.querySelectorAll("#forcastimage").forEach((item, index) => {
     item.src = forecastday[index + 1].day.condition.icon;
-   
   });
   document.querySelectorAll("#condtext").forEach((item, index) => {
     item.innerHTML = forecastday[index + 1].day.condition.text;
-   
   });
   let date = new Date();
   document.querySelector("#date").innerHTML = date.toDateString();
