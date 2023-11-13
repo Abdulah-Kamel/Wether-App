@@ -13,7 +13,7 @@ async function getForcast(query) {
   let res = await fetch(
     `http://api.weatherapi.com/v1/forecast.json?key=85725acfc1704c94aa1143606231011&q=${
       query == null ? "cairo" : query
-    }&days=7`
+    }&days=3`
   );
   if (res.status == 200 && res.ok) {
     let finalRes = await res.json();
